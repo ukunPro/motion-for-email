@@ -10,7 +10,7 @@ import time
 import requests
 
 # 推送server酱
-# sckey = sys.argv[5]
+sckey = sys.argv[5]
 
 # 开启根据地区天气情况降低步数（默认关闭）
 open_get_weather = sys.argv[3]
@@ -22,7 +22,7 @@ set_push = [True]
 # 以下如果看不懂直接默认就行只需改上面
 
 # 系数K查询到天气后降低步数比率，如查询得到设置地区为多云天气就会在随机后的步数乘0.9作为最终修改提交的步数
-# K_dict = {"多云": 0.95, "阴": 0.9, "小雨": 0.7, "中雨": 0.5, "大雨": 0.4, "暴雨": 0.3, "大暴雨": 0.2, "特大暴雨": 0.2}
+K_dict = {"多云": 0.95, "阴": 0.9, "小雨": 0.7, "中雨": 0.5, "大雨": 0.4, "暴雨": 0.3, "大暴雨": 0.2, "特大暴雨": 0.2}
 
 # 北京时间
 time_bj = datetime.datetime.today() + datetime.timedelta(hours=8)
@@ -31,37 +31,37 @@ headers = {'User-Agent': 'MiFit/5.3.0 (iPhone; iOS 14.7.1; Scale/3.00)'}
 
 
 # 获取区域天气情况
-# def getWeather():
-#     if area == "NO":
-#         print(area == "NO")
-#         return
-#     else:
-#         global K, type
-#         url = 'https://api.kit9.cn/api/seven_days_weather/api.php?city=' + area
-#         hea = {'User-Agent': 'Mozilla/5.0'}
-#         r = requests.get(url=url, headers=hea)
-#         if r.status_code == 200:
-#             result = r.text
-#             res = json.loads(result)
-#             if "多云" in res['data'][0]['weather']:
-#                 K = K_dict["多云"]
-#             elif "阴" in res['data'][0]['weather']:
-#                 K = K_dict["阴"]
-#             elif "小雨" in res['data'][0]['weather']:
-#                 K = K_dict["小雨"]
-#             elif "中雨" in res['data'][0]['weather']:
-#                 K = K_dict["中雨"]
-#             elif "大雨" in res['data'][0]['weather']:
-#                 K = K_dict["大雨"]
-#             elif "暴雨" in res['data'][0]['weather']:
-#                 K = K_dict["暴雨"]
-#             elif "大暴雨" in res['data'][0]['weather']:
-#                 K = K_dict["大暴雨"]
-#             elif "特大暴雨" in res['data'][0]['weather']:
-#                 K = K_dict["特大暴雨"]
-#             type = res['data'][0]['weather']
-#         else:
-#             print("获取天气情况出错")
+def getWeather():
+    if area == "NO":
+        print(area == "NO")
+        return
+    else:
+        global K, type
+        url = 'https://api.kit9.cn/api/seven_days_weather/api.php?city=' + area
+        hea = {'User-Agent': 'Mozilla/5.0'}
+        r = requests.get(url=url, headers=hea)
+        if r.status_code == 200:
+            result = r.text
+            res = json.loads(result)
+            if "多云" in res['data'][0]['weather']:
+                K = K_dict["多云"]
+            elif "阴" in res['data'][0]['weather']:
+                K = K_dict["阴"]
+            elif "小雨" in res['data'][0]['weather']:
+                K = K_dict["小雨"]
+            elif "中雨" in res['data'][0]['weather']:
+                K = K_dict["中雨"]
+            elif "大雨" in res['data'][0]['weather']:
+                K = K_dict["大雨"]
+            elif "暴雨" in res['data'][0]['weather']:
+                K = K_dict["暴雨"]
+            elif "大暴雨" in res['data'][0]['weather']:
+                K = K_dict["大暴雨"]
+            elif "特大暴雨" in res['data'][0]['weather']:
+                K = K_dict["特大暴雨"]
+            type = res['data'][0]['weather']
+        else:
+            print("获取天气情况出错")
 
 # 获取北京时间确定随机步数&启动主函数
 def getBeijinTime():
@@ -244,19 +244,19 @@ def get_app_token(login_token):
     return app_token
 
 # 推送server
-# def push_wx(desp=""):
-#     if sckey == 'NO':
-#         print(sckey == "NO")
-#         return
-#     else:
-#         server_url = f"https://sctapi.ftqq.com/{sckey}.send"
-#         params = {
-#             "text": '【✍小米运动步数修改✍】',
-#             "desp": desp
-#         }
+def push_wx(desp=""):
+    if sckey == 'NO':
+        print(sckey == "NO")
+        return
+    else:
+        server_url = f"https://sctapi.ftqq.com/{sckey}.send"
+        params = {
+            "text": '【✍小米运动步数修改✍】',
+            "desp": desp
+        }
 
-#         response = requests.get(server_url, params=params).text
-#         print(response)
+        response = requests.get(server_url, params=params).text
+        print(response)
         
 def main_handler(event, context):
     getBeijinTime()
