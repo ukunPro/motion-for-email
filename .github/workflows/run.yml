@@ -34,5 +34,4 @@ jobs:
           passwd='${{ secrets.PWD }}' 
           open_get_weather='${{ secrets.OPEN_GET_WEATHER }}'
           area='${{ secrets.AREA }}'
-          sckey='${{ secrets.SCKEY }}'
-          python3 main.py ${user} ${passwd} ${open_get_weather} ${area} ${sckey}
+          python3 main.py ${user} ${passwd} ${open_get_weather} ${area}
