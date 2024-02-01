@@ -238,6 +238,7 @@ def get_time():
 def get_app_token(login_token):
     url = f"https://account-cn.huami.com/v1/client/app_tokens?app_name=com.xiaomi.hm.health&dn=api-user.huami.com%2Capi-mifit.huami.com%2Capp-analytics.huami.com&login_token={login_token}"
     response = requests.get(url, headers=headers).json()
+    print(response)
     app_token = response['token_info']['app_token']
     # print("app_token获取成功！")
     # print(app_token)
