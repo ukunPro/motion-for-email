@@ -84,8 +84,8 @@ def getBeijinTime():
         print(min_ratio)
         print(max_ratio)
         max_ratio = int(hour)
-        min_1 = 7000 * min_ratio
-        max_1 = 4000 * max_ratio
+        min_1 = 3300 * min_ratio
+        max_1 = 3300 * max_ratio
         min_1 = int(K * min_1)
         max_1 = int(K * max_1)
         print("天气系数是")
@@ -129,7 +129,6 @@ def get_code(location):
 def login(user, password):
     url1 = "https://api-user.huami.com/registrations/" + user + "/tokens"
     headers = {
-        
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2"
     }
@@ -236,10 +235,8 @@ def get_time():
 
 # 获取app_token
 def get_app_token(login_token):
-    print(login_token)
     url = f"https://account-cn.huami.com/v1/client/app_tokens?app_name=com.xiaomi.hm.health&dn=api-user.huami.com%2Capi-mifit.huami.com%2Capp-analytics.huami.com&login_token={login_token}"
     response = requests.get(url, headers=headers).json()
-    print(response)
     app_token = response['token_info']['app_token']
     # print("app_token获取成功！")
     # print(app_token)
